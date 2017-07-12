@@ -10,13 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/whitelizard/react-barz.git"
   },
-  "keywords": [
-    "react",
-    "bar",
-    "graph",
-    "bars",
-    "visualization"
-  ],
+  "keywords": ["react", "bar", "graph", "bars", "visualization"],
   "author": "Esbjörn Blomquist",
   "license": "MIT",
   "bugs": {
@@ -41,6 +35,11 @@
     "eslint-plugin-react": "^7.1.0"
   },
   "dependencies": {
-    "prop-types": "^15.5.10"
+    "prop-types": "^15.5.10",
+    "immutable": "^3.8.1",
+    "react-immutable-proptypes": "^2.1.0"
+  },
+  "peerDependencies": {
+    "react": "^15.6.1"
   }
 }
