@@ -1,0 +1,46 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+
+  "globals": {
+    "window": true,
+    "navigator": true,
+    "document": true
+  },
+  "rules": {
+    "new-cap": [2, {
+      "capIsNewExceptions": [
+        "Seq",
+        "OrderedMap",
+        "OrderedSet",
+        "List",
+        "Map",
+        "Seq",
+        "Set",
+        "Range"
+      ]
+    }],
+
+    "react/jsx-no-bind": [2, {
+      "ignoreRefs": false,
+      "allowArrowFunctions": true,
+      "allowBind": true
+    }],
+
+    "import/no-unresolved": [0],
+    "react/prefer-stateless-function": [0],
+    "no-restricted-syntax": [0],
+    "jsx-a11y/img-has-alt": [0],
+    "jsx-a11y/anchor-has-content": [1],
+    "no-mixed-operators": [0],
+    "no-underscore-dangle": [0],
+    "arrow-parens": [2, "as-needed"]
+  },
+
+  "parserOptions": {
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
+    }
+  }
+
+}
