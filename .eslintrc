@@ -31,6 +31,7 @@
     "react/prefer-stateless-function": [0],
     "no-restricted-syntax": [0],
     "jsx-a11y/img-has-alt": [0],
+    "jsx-a11y/href-no-hash": [0],
     "jsx-a11y/anchor-has-content": [1],
     "no-mixed-operators": [0],
     "no-underscore-dangle": [0],

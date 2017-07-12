@@ -21,12 +21,15 @@ const styles = {
   },
 };
 
-class Barz extends React.PureComponent {
+export default class Barz extends React.PureComponent {
   static propTypes = {
     width: PropTypes.number,
     scale: PropTypes.objectOfType(PropTypes.oneOf(PropTypes.number, PropTypes.array)),
     unit: PropTypes.string,
     bars: IPropTypes.list,
+    lineStyle: PropTypes.objectOfType(PropTypes.any),
+    barStyle: PropTypes.objectOfType(PropTypes.any),
+    textStyle: PropTypes.objectOfType(PropTypes.any),
   };
   static defaultProps = {
     width: 300,
@@ -41,14 +44,13 @@ class Barz extends React.PureComponent {
   // }
 
   renderBar(name, value) {
-    const { width, barUnit, scale, lineStyle, barStyle, textStyle } = this.props;
+    const { width, unit, scale, lineStyle, barStyle, textStyle } = this.props;
     const length = width / (scale.max - scale.min) * (value - scale.min);
     const rgb = scale.minColor.map((c, i) =>
       Math.floor(c + (scale.maxColor[i] - c) * length / width),
     );
     const color = `rgb(${rgb.join(',')})`;
     const bgColor = `rgb(${scale.bgColor.join(',')})`;
-    const background = `linear-gradient(to right, ${color} 50%, ${bgColor} 50%, ${bgColor}) no-repeat`;
     return (
       <div style={{ ...lineStyle, position: 'relative', backgroundColor: bgColor }}>
         <div style={{ ...textStyle }}>&nbsp;</div>
@@ -60,7 +62,7 @@ class Barz extends React.PureComponent {
             </div>
             <div style={{ float: 'right', ...textStyle }}>
               {value}
-              {barUnit}
+              {unit}
             </div>
             <div style={{ clear: 'both' }} />
           </div>
@@ -70,7 +72,7 @@ class Barz extends React.PureComponent {
   }
 
   render() {
-    const { scale, barUnit, bars, width } = this.props;
+    const { scale, unit, bars, width } = this.props;
     return (
       <div style={{ width, transition }}>
         {bars.map(pair => this.renderBar(pair[0], pair[1]))}
