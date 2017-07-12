@@ -36,12 +36,10 @@ export default class Barz extends React.PureComponent {
     scale: { min: 0, max: 100 },
     unit: '',
     bars: List(),
+    lineStyle: {},
+    barStyle: {},
+    textStyle: {},
   };
-
-  // shouldComponentUpdate(nextProps) {
-  //   const { width, bars } = nextProps;
-  //   return width !== this.props.width || JSON.stringify(bars) !== JSON.stringify(this.props.bars);
-  // }
 
   renderBar(name, value) {
     const { width, unit, scale, lineStyle, barStyle, textStyle } = this.props;
@@ -72,7 +70,7 @@ export default class Barz extends React.PureComponent {
   }
 
   render() {
-    const { scale, unit, bars, width } = this.props;
+    const { bars, width } = this.props;
     return (
       <div style={{ width, transition }}>
         {bars.map(pair => this.renderBar(pair[0], pair[1]))}
