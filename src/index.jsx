@@ -50,7 +50,7 @@ export default class Barz extends React.PureComponent {
     const color = `rgb(${rgb.join(',')})`;
     const bgColor = `rgb(${scale.bgColor.join(',')})`;
     return (
-      <div style={{ ...lineStyle, position: 'relative', backgroundColor: bgColor }}>
+      <div key={name} style={{ ...lineStyle, position: 'relative', backgroundColor: bgColor }}>
         <div style={{ ...textStyle }}>&nbsp;</div>
         <div style={{ ...styles.bar, ...barStyle, width: length, backgroundColor: color }} />
         <div style={{ ...styles.line, ...lineStyle }}>
