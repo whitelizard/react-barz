@@ -73,7 +73,7 @@ export default class Barz extends React.PureComponent {
     const { bars, width } = this.props;
     return (
       <div style={{ width, transition }}>
-        {bars.map(pair => this.renderBar(pair[0], pair[1]))}
+        {bars.map(pair => this.renderBar(pair.get(0), pair.get(1)))}
       </div>
     );
   }
