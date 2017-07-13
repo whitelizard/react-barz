@@ -24,12 +24,12 @@ const styles = {
 export default class Barz extends React.PureComponent {
   static propTypes = {
     width: PropTypes.number,
-    scale: PropTypes.objectOfType(PropTypes.oneOf(PropTypes.number, PropTypes.array)),
+    scale: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.number, PropTypes.array])),
     unit: PropTypes.string,
     bars: IPropTypes.list,
-    lineStyle: PropTypes.objectOfType(PropTypes.any),
-    barStyle: PropTypes.objectOfType(PropTypes.any),
-    textStyle: PropTypes.objectOfType(PropTypes.any),
+    lineStyle: PropTypes.objectOf(PropTypes.any),
+    barStyle: PropTypes.objectOf(PropTypes.any),
+    textStyle: PropTypes.objectOf(PropTypes.any),
   };
   static defaultProps = {
     width: 300,
