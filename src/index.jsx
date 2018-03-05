@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { List } from 'immutable';
-import IPropTypes from 'react-immutable-proptypes';
 
 const transition = 'all .4s ease';
 
@@ -26,7 +24,7 @@ export default class Barz extends React.PureComponent {
     width: PropTypes.number,
     scale: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.number, PropTypes.array])),
     unit: PropTypes.string,
-    bars: IPropTypes.list,
+    bars: PropTypes.arrayOf(PropTypes.array),
     lineStyle: PropTypes.objectOf(PropTypes.any),
     barStyle: PropTypes.objectOf(PropTypes.any),
     textStyle: PropTypes.objectOf(PropTypes.any),
@@ -35,7 +33,7 @@ export default class Barz extends React.PureComponent {
     width: 300,
     scale: { min: 0, max: 100 },
     unit: '',
-    bars: List(),
+    bars: [],
     lineStyle: {},
     barStyle: {},
     textStyle: {},
@@ -55,9 +53,7 @@ export default class Barz extends React.PureComponent {
         <div style={{ ...styles.bar, ...barStyle, width: length, backgroundColor: color }} />
         <div style={{ ...styles.line, ...lineStyle }}>
           <div style={{}}>
-            <div style={{ float: 'left', ...textStyle }}>
-              {name}
-            </div>
+            <div style={{ float: 'left', ...textStyle }}>{name}</div>
             <div style={{ float: 'right', ...textStyle }}>
               {value}
               {unit}
@@ -72,9 +68,7 @@ export default class Barz extends React.PureComponent {
   render() {
     const { bars, width } = this.props;
     return (
-      <div style={{ width, transition }}>
-        {bars.map(pair => this.renderBar(pair.get(0), pair.get(1)))}
-      </div>
+      <div style={{ width, transition }}>{bars.map(pair => this.renderBar(pair[0], pair[1]))}</div>
     );
   }
 }
