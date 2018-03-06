@@ -21,15 +21,17 @@ const styles = {
 
 export default class Barz extends React.PureComponent {
   static propTypes = {
+    labels: PropTypes.arrayOf(PropTypes.any),
     width: PropTypes.number,
     scale: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.number, PropTypes.array])),
     unit: PropTypes.string,
-    bars: PropTypes.arrayOf(PropTypes.array),
+    bars: PropTypes.arrayOf(PropTypes.oneOfType(PropTypes.array, PropTypes.number)),
     lineStyle: PropTypes.objectOf(PropTypes.any),
     barStyle: PropTypes.objectOf(PropTypes.any),
     textStyle: PropTypes.objectOf(PropTypes.any),
   };
   static defaultProps = {
+    labels: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
     width: 300,
     scale: { min: 0, max: 100 },
     unit: '',
@@ -39,8 +41,15 @@ export default class Barz extends React.PureComponent {
     textStyle: {},
   };
 
-  renderBar(name, value) {
-    const { width, unit, scale, lineStyle, barStyle, textStyle } = this.props;
+  renderBar(value, index) {
+    const { width, unit, scale, lineStyle, barStyle, textStyle, labels } = this.props;
+    /* eslint-disable no-param-reassign */
+    let label = labels[index];
+    if (Array.isArray(value)) {
+      label = value[0];
+      value = value[1];
+    }
+    /* eslint-enable no-param-reassign */
     const length = width / (scale.max - scale.min) * (value - scale.min);
     const rgb = scale.minColor.map((c, i) =>
       Math.floor(c + (scale.maxColor[i] - c) * length / width),
@@ -48,12 +57,12 @@ export default class Barz extends React.PureComponent {
     const color = `rgb(${rgb.join(',')})`;
     const bgColor = `rgb(${scale.bgColor.join(',')})`;
     return (
-      <div key={name} style={{ ...lineStyle, position: 'relative', backgroundColor: bgColor }}>
+      <div key={index} style={{ ...lineStyle, position: 'relative', backgroundColor: bgColor }}>
         <div style={{ ...textStyle }}>&nbsp;</div>
         <div style={{ ...styles.bar, ...barStyle, width: length, backgroundColor: color }} />
         <div style={{ ...styles.line, ...lineStyle }}>
           <div style={{}}>
-            <div style={{ float: 'left', ...textStyle }}>{name}</div>
+            <div style={{ float: 'left', ...textStyle }}>{label}</div>
             <div style={{ float: 'right', ...textStyle }}>
               {value}
               {unit}
@@ -68,7 +77,7 @@ export default class Barz extends React.PureComponent {
   render() {
     const { bars, width } = this.props;
     return (
-      <div style={{ width, transition }}>{bars.map(pair => this.renderBar(pair[0], pair[1]))}</div>
+      <div style={{ width, transition }}>{bars.map((value, ix) => this.renderBar(value, ix))}</div>
     );
   }
 }
